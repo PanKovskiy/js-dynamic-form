@@ -22,18 +22,18 @@ function addToPage() {
     p.append(ourElement);
 
     var buttonRemove = document.createElement('button');
-    buttonRemove.setAttribute("id", "buttonRemove");
     buttonRemove.setAttribute("type", "button");
     buttonRemove.setAttribute("class", "btn btn-dark btn-sm");
-    // buttonRemove.setAttribute("onclick", "removeFromPage()");
     buttonRemove.textContent = "Remove from page";
-    buttonRemove.onclick.bind(buttonRemove)
+    buttonRemove.onclick = removeFromPage.bind(null,ourElement);
     p.append(buttonRemove);
+
 }
 
-function removeFromPage() {
-    console.log(buttonRemove.parentNode);
-    buttonRemove.parentNode.remove();
+function removeFromPage(el) {
+    console.log(el);
+    el.parentNode.remove();
+    // this.parentNode.parentNode.removeChild(this.parentNode);
 }
 
 document.getElementById('buttonAdd').onclick = addToPage;
