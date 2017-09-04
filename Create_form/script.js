@@ -75,11 +75,12 @@ function addToPage() {
     if (!(document.body.firstElementChild.querySelector("button[type=submit]"))) {
         console.log("Testcreate buttonSubmit");
         var div = document.createElement('div');
+        div.setAttribute("class", "row submitButton");
         document.body.firstElementChild.append(div);
         var buttonSubmit = document.createElement('button');
         buttonSubmit.setAttribute("id", "buttonSubmit");
         buttonSubmit.setAttribute("type", "submit");
-        buttonSubmit.setAttribute("class", "btn btn-primary float-left");
+        buttonSubmit.setAttribute("class", "btn btn-primary");
         buttonSubmit.textContent = "Submit";
         div.append(buttonSubmit);
         document.getElementById('buttonSubmit').onclick = submitToPage;
@@ -97,18 +98,38 @@ function removeFromPage(el) {
 }
 
 function submitToPage() {
-    var el = document.getElementsByClassName("element");
-    for (var i = 0; i < el.length; i++) {
-        var p = document.createElement('p');
-        document.body.firstElementChild.append(p);
-        p.innerHTML = el[i].tagName + 'el[i].value';
-        // p.append(el[i].tagName);
-        // p.append(el[i].value);
-        console.log(el[i].value);
+    if (!(document.getElementsByClassName('outblock')[0])) {
+        var div=document.createElement('div');
+        div.setAttribute("class", "row outblock");
+        document.getElementsByClassName('submitButton')[0].after(div);
+    } else {
+        div = document.getElementsByClassName('outblock')[0];
+        var el = document.getElementsByClassName("element");
+        for (var i = 0; i < el.length; i++) {
+            var p = document.createElement('p');
+            div.append(p);
+            p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->'+ el[i].value;
+            console.log(el[i].value);
+        }
     }
-    for (var key in el) {
-        console.log(key + "-----"+el[key]);
+    if (!(document.getElementById('buttonClear'))) {
+        var div = document.createElement('div');
+        div.setAttribute("class", "row clearButton");
+        document.getElementsByClassName('outblock')[0].after(div);
+        var buttonClear = document.createElement('button');
+        buttonClear.setAttribute("id", "buttonClear");
+        buttonClear.setAttribute("class", "btn btn-secondary");
+        buttonClear.textContent = "Clear";
+        div.append(buttonClear);
+        document.getElementById('buttonClear').onclick = clearPage;
     }
+
 }
+
+function clearPage() {
+    document.getElementsByClassName('outblock')[0].innerHTML="";
+    document.getElementById('buttonClear').remove();
+
+}
+
 document.getElementById('buttonAdd').onclick = addToPage;
-// document.getElementById('buttonSubmit').onclick = submitToPage;
