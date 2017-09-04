@@ -25,6 +25,7 @@ function addToPage() {
 
             var ourElement = document.createElement(elSelect.value);
             div.append(ourElement);
+            ourElement.classList.add('element');
             console.log(div);
             break;
 
@@ -39,6 +40,7 @@ function addToPage() {
 
             var input = document.createElement('input');
             input.setAttribute('class', 'form-check-input');
+            input.classList.add('element');
             input.setAttribute('type', elSelect.value);
             input.setAttribute('name', 'example'+elSelect.value);
             input.setAttribute('value', 'option1');
@@ -53,6 +55,7 @@ function addToPage() {
 
             var input = document.createElement('input');
             input.setAttribute('class', 'form-check-input');
+            input.classList.add('element');
             input.setAttribute('type', elSelect.value);
             input.setAttribute('name', 'example'+elSelect.value);
             input.setAttribute('value', 'option2');
@@ -64,29 +67,48 @@ function addToPage() {
     var buttonRemove = document.createElement('button');
     buttonRemove.setAttribute("type", "button");
     buttonRemove.setAttribute("class", "btn btn-dark");
+    buttonRemove.classList.add('buttonRemove');
     buttonRemove.textContent = "Remove";
     buttonRemove.onclick = removeFromPage.bind(null, div);
     div.append(buttonRemove);
 
     if (!(document.body.firstElementChild.querySelector("button[type=submit]"))) {
-        console.log(document.body.firstElementChild.lastElementChild);
+        console.log("Testcreate buttonSubmit");
+        var div = document.createElement('div');
+        document.body.firstElementChild.append(div);
         var buttonSubmit = document.createElement('button');
+        buttonSubmit.setAttribute("id", "buttonSubmit");
         buttonSubmit.setAttribute("type", "submit");
-        buttonSubmit.setAttribute("class", "btn btn-primary float-right");
+        buttonSubmit.setAttribute("class", "btn btn-primary float-left");
         buttonSubmit.textContent = "Submit";
-        document.body.firstElementChild.append(buttonSubmit);
+        div.append(buttonSubmit);
+        document.getElementById('buttonSubmit').onclick = submitToPage;
     }
 
 
 }
 
-if (document.getElementsByName('formoutput').length > 1 ) {
-    document.body.firstElementChild.querySelector("button[type=submit]").remove();
-};
-
 function removeFromPage(el) {
     console.log(el);
     el.remove();
+    if (!(document.body.getElementsByClassName("buttonRemove")[0])) {
+        document.getElementById('buttonSubmit').remove();
+    };
 }
 
+function submitToPage() {
+    var el = document.getElementsByClassName("element");
+    for (var i = 0; i < el.length; i++) {
+        var p = document.createElement('p');
+        document.body.firstElementChild.append(p);
+        p.innerHTML = el[i].tagName + 'el[i].value';
+        // p.append(el[i].tagName);
+        // p.append(el[i].value);
+        console.log(el[i].value);
+    }
+    for (var key in el) {
+        console.log(key + "-----"+el[key]);
+    }
+}
 document.getElementById('buttonAdd').onclick = addToPage;
+// document.getElementById('buttonSubmit').onclick = submitToPage;
