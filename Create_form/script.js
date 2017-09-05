@@ -99,7 +99,7 @@ function removeFromPage(el) {
 
 function submitToPage() {
     if (!(document.getElementsByClassName('outblock')[0])) {
-        var div=document.createElement('div');
+        var div = document.createElement('div');
         div.setAttribute("class", "row outblock");
         document.getElementsByClassName('divSubmit')[0].after(div);
         // div = document.getElementsByClassName('outblock')[0];
@@ -107,8 +107,13 @@ function submitToPage() {
         for (var i = 0; i < el.length; i++) {
             var p = document.createElement('p');
             div.append(p);
-            p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->'+ el[i].value;
-            console.log(el[i].value);
+            if (el[i].type == 'radio' || el[i].type == 'checkbox') {
+                p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->' + el[i].value + '--------------->' + el[i].checked;
+            }
+            else {
+                p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->' + el[i].value;
+                console.log(el[i].value);
+            }
         }
     }
     else {
@@ -117,8 +122,13 @@ function submitToPage() {
         for (var i = 0; i < el.length; i++) {
             var p = document.createElement('p');
             div.append(p);
-            p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->'+ el[i].value;
-            console.log(el[i].value);
+            if (el[i].type == 'radio' || el[i].type == 'checkbox') {
+                p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->' + el[i].value + '--------------->' + el[i].checked;
+            }
+            else {
+                p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->' + el[i].value;
+                console.log(el[i].value);
+            }
         }
     }
     if (!(document.getElementById('buttonClear'))) {
