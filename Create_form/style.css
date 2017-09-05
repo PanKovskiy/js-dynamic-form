@@ -16,7 +16,7 @@ body {
 }
 
 .form-inline .form-check {
-     justify-content: left;
+    justify-content: left;
 }
 
 .row {
@@ -25,7 +25,7 @@ body {
 
 }
 
-.submitButton, .clearButton {
+.divSubmit, .divClear {
     justify-content: flex-end;
 }
 

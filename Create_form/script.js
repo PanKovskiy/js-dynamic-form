@@ -75,8 +75,8 @@ function addToPage() {
     if (!(document.body.firstElementChild.querySelector("button[type=submit]"))) {
         console.log("Testcreate buttonSubmit");
         var div = document.createElement('div');
-        div.setAttribute("class", "row submitButton");
-        document.body.firstElementChild.append(div);
+        div.setAttribute("class", "row divSubmit");
+        document.getElementsByClassName('inputblock')[0].after(div);
         var buttonSubmit = document.createElement('button');
         buttonSubmit.setAttribute("id", "buttonSubmit");
         buttonSubmit.setAttribute("type", "submit");
@@ -93,7 +93,7 @@ function removeFromPage(el) {
     console.log(el);
     el.remove();
     if (!(document.body.getElementsByClassName("buttonRemove")[0])) {
-        document.getElementById('buttonSubmit').remove();
+        document.getElementsByClassName('divSubmit')[0].remove();
     };
 }
 
@@ -101,8 +101,17 @@ function submitToPage() {
     if (!(document.getElementsByClassName('outblock')[0])) {
         var div=document.createElement('div');
         div.setAttribute("class", "row outblock");
-        document.getElementsByClassName('submitButton')[0].after(div);
-    } else {
+        document.getElementsByClassName('divSubmit')[0].after(div);
+        // div = document.getElementsByClassName('outblock')[0];
+        var el = document.getElementsByClassName("element");
+        for (var i = 0; i < el.length; i++) {
+            var p = document.createElement('p');
+            div.append(p);
+            p.innerHTML = '<b>' + el[i].tagName + '</b>' + '--------------->'+ el[i].value;
+            console.log(el[i].value);
+        }
+    }
+    else {
         div = document.getElementsByClassName('outblock')[0];
         var el = document.getElementsByClassName("element");
         for (var i = 0; i < el.length; i++) {
@@ -114,7 +123,7 @@ function submitToPage() {
     }
     if (!(document.getElementById('buttonClear'))) {
         var div = document.createElement('div');
-        div.setAttribute("class", "row clearButton");
+        div.setAttribute("class", "row divClear");
         document.getElementsByClassName('outblock')[0].after(div);
         var buttonClear = document.createElement('button');
         buttonClear.setAttribute("id", "buttonClear");
@@ -127,9 +136,8 @@ function submitToPage() {
 }
 
 function clearPage() {
-    document.getElementsByClassName('outblock')[0].innerHTML="";
-    document.getElementById('buttonClear').remove();
-
+    document.getElementsByClassName('divClear')[0].remove();
+    document.getElementsByClassName('outblock')[0].remove();
 }
 
 document.getElementById('buttonAdd').onclick = addToPage;
