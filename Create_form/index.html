@@ -7,28 +7,27 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-    <h3>Form for choise</h3>
-        <div class = "form-inline d-flex justify-content-between">
-        <!--<div class="form-group">-->
-                <label>Please choose element</label>
-                <select class="form-control custom-select" id="exampleFormControlSelect1">
-                    <option value="input">input el</option>
-                    <option value="textarea">textarea el</option>
-                    <option value="checkbox">checkbox el</option>
-                    <option value="radio">radiobutton el</option>
-                </select>
-        <!--</div>-->
+    <div class="container">
+        <h3>Form for choise</h3>
+        <div class="form-inline d-flex justify-content-between">
+            <label>Please choose element</label>
+            <select class="form-control custom-select" id="exampleFormControlSelect1">
+                <option value="">Select element</option>
+                <option value="input">input el</option>
+                <option value="textarea">textarea el</option>
+                <option value="checkbox">checkbox el</option>
+                <option value="radio">radiobutton el</option>
+            </select>
             <button id="buttonAdd" type="button" class="btn btn-dark">Add to page</button>
         </div>
         <div class="inputblock">
-        <fieldset name="formoutput">
+            <fieldset>
                 <legend> Form for output</legend>
-        </fieldset>
+            </fieldset>
+            <div id="formoutput"></div>
         </div>
-</div>
 
-<script src="script.js"></script>
-
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
