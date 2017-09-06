@@ -51,23 +51,27 @@ function addToPage() {
     index++;
 
     bindRemoveEvent();
+    createButtonSubmit();
+}
 
+function createButtonSubmit() {
     if (!document.getElementById('buttonSubmit')) {
-        document.querySelector('.container').insertAdjacentHTML('beforeend',
+        document.getElementById('formoutput').insertAdjacentHTML('afterEnd',
             '<div class="row divSubmit">\
                 <button id="buttonSubmit" type="submit" class="btn btn-primary">Submit</button>\
-            </div>\
-            <div class="result-block"></div>'
+            </div>'
         );
 
         document.getElementById('buttonSubmit').onclick = submitToPage;
     }
+
 }
 
 function removeFromPage(index) {
     document.querySelector(".added-form-block:nth-child(" + index + ")").remove();
 
     bindRemoveEvent();
+
     if (document.getElementById('formoutput').childElementCount === 0) {
         document.querySelector('.divSubmit').remove();
     }
@@ -97,22 +101,43 @@ function submitToPage() {
             default:
         }
 
-        outHTML += '<b>' + obj.tagName.toLowerCase() + '</b>' + value + '<br/>';
+        outHTML +=
+            '<div class="col-6">\
+                <b>\
+                ' + obj.tagName.toLowerCase() + '\
+                </b>\
+            </div>\
+            <div class="col-6">\
+                ' + value + '\
+            </div>';
         console.log(obj.tagName.toLowerCase(), value);
     });
+
     if (outHTML !== '') {
-        document.querySelector('.result-block').innerHTML = outHTML +
+        if (!(document.getElementsByClassName('result-block')[0])) {
+            document.querySelector('.divSubmit').insertAdjacentHTML('afterEnd',
+                '<div class="result-block"></div>'
+            );
+        }
+        document.querySelector('.result-block').innerHTML = outHTML
+    }
+    createButtonClear();
+}
+
+function createButtonClear() {
+    if (!document.getElementById('buttonClear')) {
+        document.querySelector('.result-block').insertAdjacentHTML('afterEnd',
             '<div class="row divClear">\
                 <button id="buttonClear" class="btn btn-secondary">Clear</button>\
-            </div>';
-
-        document.getElementById('buttonClear').onclick = clearPage;
+            </div>'
+        );
     }
-
+    document.getElementById('buttonClear').onclick = clearPage;
 }
 
 function clearPage() {
-    document.querySelector('.result-block').innerHTML = '';
+    document.querySelector('.result-block').remove();
+    document.getElementById('buttonClear').remove();
 }
 
 document.getElementById('buttonAdd').onclick = addToPage;

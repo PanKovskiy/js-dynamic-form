@@ -31,3 +31,7 @@ body {
 .outblock {
     display: block;
 }
+
+.resultblock {
+    display: flex;
+}
