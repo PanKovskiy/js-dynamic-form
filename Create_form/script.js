@@ -1,6 +1,5 @@
-var index = 0;
 function addToPage() {
-    var container = document.getElementById('formoutput'),
+    let container = document.getElementById('formoutput'),
         controlName = '',
         controlHTML = '';
     switch (document.getElementById('exampleFormControlSelect1').value) {
@@ -15,26 +14,26 @@ function addToPage() {
         case 'checkbox':
             controlName = 'checkbox';
             controlHTML =
-                '<div>\
-                    <div class="form-check">\
-                        <input class="form-check-input element" type="checkbox" name="examplecheckbox" value="option1" />option1\
-                    </div>\
-                    <div class="form-check">\
-                        <input class="form-check-input element" type="checkbox" name="examplecheckbox" value="option2">option2\
-                    </div>\
-                </div>';
+                `<div>
+                    <div class="form-check">
+                        <input class="form-check-input element" type="checkbox" name="examplecheckbox" value="option1" />option1
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input element" type="checkbox" name="examplecheckbox" value="option2">option2
+                    </div>
+                </div>`;
             break;
         case 'radio':
             controlName = 'radio';
             controlHTML =
-                '<div>\
-                    <div class="form-check">\
-                        <input class="form-check-input element" type="radio" name="exampleradio" value="option1" />option1\
-                    </div>\
-                    <div class="form-check">\
-                        <input class="form-check-input element" type="radio" name="exampleradio" value="option2">option2\
-                    </div>\
-                </div>';
+                `<div>
+                    <div class="form-check">
+                        <input class="form-check-input element" type="radio" name="exampleradio" value="option1">option1
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input element" type="radio" name="exampleradio" value="option2">option2
+                    </div>
+                </div>`;
             break;
 
         default:
@@ -42,13 +41,12 @@ function addToPage() {
     }
 
     container.insertAdjacentHTML('beforeend',
-        '<div class="form-inline added-form-block">\
-                <label for="input">Example ' + index + ' ' + controlName + '</label>\
-            ' + controlHTML + '\
-            <button type="button" class="btn btn-dark buttonRemove">Remove</button>\
-        </div>'
+        `<div class="form-inline added-form-block">
+            <label for="input">Example ${controlName}</label>
+            ${controlHTML}
+            <button type="button" class="btn btn-dark buttonRemove">Remove</button>
+        </div>`
     );
-    index++;
 
     bindRemoveEvent();
     createButtonSubmit();
@@ -57,9 +55,9 @@ function addToPage() {
 function createButtonSubmit() {
     if (!document.getElementById('buttonSubmit')) {
         document.getElementById('formoutput').insertAdjacentHTML('afterEnd',
-            '<div class="row divSubmit">\
-                <button id="buttonSubmit" type="submit" class="btn btn-primary">Submit</button>\
-            </div>'
+            `<div class="row divSubmit">
+                <button id="buttonSubmit" type="submit" class="btn btn-primary">Submit</button>
+            </div>`
         );
 
         document.getElementById('buttonSubmit').onclick = submitToPage;
@@ -68,7 +66,7 @@ function createButtonSubmit() {
 }
 
 function removeFromPage(index) {
-    document.querySelector(".added-form-block:nth-child(" + index + ")").remove();
+    document.querySelector(`.added-form-block:nth-child(${index})`).remove();
 
     bindRemoveEvent();
 
@@ -78,20 +76,18 @@ function removeFromPage(index) {
 }
 
 function bindRemoveEvent() {
-    document.querySelectorAll(".buttonRemove").forEach(function(obj, index) {
-        obj.onclick = removeFromPage.bind(this, index + 1);
-    });
+    document.querySelectorAll(".buttonRemove").forEach((obj, index) => obj.onclick = removeFromPage.bind(this, index + 1));
 }
 
 function submitToPage() {
-    var outHTML = '';
-    document.querySelectorAll(".added-form-block .element").forEach(function(obj) {
-        var value = '';
+    let outHTML = '';
+    document.querySelectorAll(".added-form-block .element").forEach(obj => {
+        let value = '';
         switch (obj.tagName.toLowerCase()) {
             case 'input':
                 value = obj.value;
                 if (obj.type == 'radio' || obj.type == 'checkbox') {
-                    value += '--------------->' + obj.checked;
+                    value += `->${obj.checked}`;
                 }
 
                 break;
@@ -102,14 +98,14 @@ function submitToPage() {
         }
 
         outHTML +=
-            '<div class="col-6">\
-                <b>\
-                ' + obj.tagName.toLowerCase() + '\
-                </b>\
-            </div>\
-            <div class="col-6">\
-                ' + value + '\
-            </div>';
+            `<div class="row">
+                <div class="col-4">
+                    <b>${obj.tagName.toLowerCase()}</b>
+                </div>
+                <div class="col-8">
+                    ${value}
+                </div>
+            </div>`;
         console.log(obj.tagName.toLowerCase(), value);
     });
 
@@ -127,9 +123,9 @@ function submitToPage() {
 function createButtonClear() {
     if (!document.getElementById('buttonClear')) {
         document.querySelector('.result-block').insertAdjacentHTML('afterEnd',
-            '<div class="row divClear">\
-                <button id="buttonClear" class="btn btn-secondary">Clear</button>\
-            </div>'
+            `<div class="row divClear">
+                <button id="buttonClear" class="btn btn-secondary">Clear</button>
+            </div>`
         );
     }
     document.getElementById('buttonClear').onclick = clearPage;
